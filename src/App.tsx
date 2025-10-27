@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import "./App.css"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div style={{
+        backgroundColor: "#4577C5",
+        padding: "20px",
+      }}>
+        <Link className='linkRoute' to={"/"}>Trang chủ</Link>
+        <Link className='linkRoute' to={"/Bai1"}>Bài 1</Link>
+        <Link className='linkRoute' to={"/bai2"}>Bài 2</Link>
+        <Link className='linkRoute' to={"/bai3"}>Bài 3</Link>
+      </div>
+
+      <div style={{
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0 2px 6px #0000000f',
+        margin: '20px auto',
+        maxWidth: '980px',
+        padding: '20px',
+      }}>
+        <Outlet />
+      </div>
+
     </div>
   );
 }
