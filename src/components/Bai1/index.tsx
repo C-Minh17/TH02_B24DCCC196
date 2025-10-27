@@ -6,14 +6,23 @@ const Bai1 = () => {
   const [dataInput, setDataInput] = useState<string>("")
   const [isXem, setIsXem] = useState<boolean>(false)
   const [isLoading, setloading] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false)
 
   const xemThoiTiet = async () => {
     if (dataInput.trim()) {
       setIsXem(false)
+      setIsError(false)
       setloading(true)
-      await getThoiTiet(dataInput).then(res => setData(res.data))
-      setIsXem(true)
-      setloading(false)
+      try {
+        const res = await getThoiTiet(dataInput)
+        setData(res.data)
+        setIsXem(true)
+      } catch (error) {
+        console.error("Lỗi khi gọi API thời tiết:", error)
+        setIsError(true)
+      } finally {
+        setloading(false)
+      }
     }
   }
 
@@ -49,6 +58,10 @@ const Bai1 = () => {
       </div>
       <div>
         {isLoading ? <div> Đang tải ....</div>
+          : <></>}
+      </div>
+      <div>
+        {isError ? <div> Vui lòng nhập lại khu vực hợp lệ</div>
           : <></>}
       </div>
     </div>
