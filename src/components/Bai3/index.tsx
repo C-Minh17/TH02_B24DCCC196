@@ -20,7 +20,7 @@ const Bai3 = () => {
       {data?.map(item => (
         <div style={{ margin: '30px 0' }} key={item.id}>
           <div style={{
-            width: "400px"
+            width: "350px"
           }}>
             < img width={"100%"} src={item.image_url} /></div>
           <h3>{item.title}</h3>

@@ -5,10 +5,16 @@ const Bai1 = () => {
   const [data, setData] = useState<any>()
   const [dataInput, setDataInput] = useState<string>("")
   const [isXem, setIsXem] = useState<boolean>(false)
+  const [isLoading, setloading] = useState<boolean>(false)
 
   const xemThoiTiet = async () => {
-    await getThoiTiet(dataInput).then(res => setData(res.data))
-    setIsXem(true)
+    if (dataInput.trim()) {
+      setIsXem(false)
+      setloading(true)
+      await getThoiTiet(dataInput).then(res => setData(res.data))
+      setIsXem(true)
+      setloading(false)
+    }
   }
 
   return (
@@ -23,10 +29,14 @@ const Bai1 = () => {
       <h1>Thời tiết</h1>
       <div>
         <input
+          style={{
+            marginRight: "5px",
+            padding: "5px"
+          }}
           onChange={(e: any) => setDataInput(e.target.value)}
           placeholder="Nhập tên thành phố ....."
         />
-        <button onClick={xemThoiTiet}>xem</button>
+        <button style={{ padding: "5px 10px" }} onClick={xemThoiTiet}>xem</button>
       </div>
       <div>
         {isXem ?
@@ -36,6 +46,10 @@ const Bai1 = () => {
           </> :
           <></>
         }
+      </div>
+      <div>
+        {isLoading ? <div> Đang tải ....</div>
+          : <></>}
       </div>
     </div>
   )
